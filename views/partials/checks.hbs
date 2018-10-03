@@ -1,0 +1,39 @@
+<table class="site-checks-table">
+  <thead>
+    <tr><th>Active?</th><th>Checked</th><th>Link Summary</th></tr>
+  </thead>
+  <tbody>
+    {{#each checks}}
+      <tr><td>{{#if result.active }}✓{{else}}X{{/if}}</td><td>{{ datetime }}</td><td class="check-results">{{#with result}}{{> checks-result }}{{/with}}</td></tr>
+    {{/each}}
+  </tbody>  
+</table>
+<style>
+  .site-checks-table td {
+    vertical-align: baseline;
+  }
+  .check-results ul {
+    list-style: none;
+  }
+  .check-results ul li {
+    padding: 0 1em;
+  }
+  .check-results ul.found li {
+    background-color: hsl(120,50%,90%);
+  }
+  .check-results ul.found li:before {
+    content: '✓ ';
+  }
+  .check-results ul.mystery li {
+    background-color: hsl(52,100%,90%);
+  }
+  .check-results ul.mystery li:before {
+    content: '？ ';
+  }
+  .check-results ul.missing li {
+    background-color: hsl(344,66%,90%);
+  }
+  .check-results ul.missing li:before {
+    content: 'X ';
+  }
+</style>

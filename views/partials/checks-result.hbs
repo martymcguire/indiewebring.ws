@@ -1,0 +1,21 @@
+{{#if found }}
+<ul class="found">
+  {{#each found }}
+    <li>{{ @key }} - {{ . }}</li>
+  {{/each}}
+</ul>
+{{/if}}
+{{#if missing }}
+<ul class="missing">
+  {{#each missing }}
+    <li>{{ @key }} - {{ . }}</li>
+  {{/each}}
+</ul>
+{{/if}}
+{{#if mystery }}
+<ul class="mystery">
+  {{#each mystery }}
+    <li>{{ @key }} - {{ . }}</li>
+  {{/each}}
+</ul>
+{{/if}}

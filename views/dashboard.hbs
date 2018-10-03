@@ -1,0 +1,27 @@
+<h3>
+  Hello, {{ site.url }} ({{site.slug}})!
+</h3>
+
+<div>
+  Your site is currently: {{#unless site.active }}NOT {{/unless}} ACTIVE.
+</div>
+
+<div>
+  To stay active, make sure links like these are visible on your site:
+</div>
+
+<div>
+<textarea rows="6" cols="60">
+<a href="https://{{ hostname }}/{{site.slug}}/previous">←</a>
+An IndieWeb Webring 🕸💍
+<a href="https://{{ hostname }}/{{site.slug}}/next">→</a>
+</textarea>  
+</div>
+
+<form action="/check-links" method="POST">
+  <input type="submit" value="Check links now!"/>
+</form>
+
+{{#if checks }}
+ {{> checks }}
+{{/if}}
