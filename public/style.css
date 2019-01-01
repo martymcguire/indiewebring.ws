@@ -69,3 +69,10 @@ footer {
   padding-top: 25px;
   border-top: 1px solid lightgrey;
 }
+
+.profile {
+  display: grid;
+}
+.profile > img {
+  max-width: 100%;
+}

@@ -1,6 +1,18 @@
 <h3>
-  Hello, {{ site.url }} ({{site.slug}})!
+  Hello, {{ site.url }} ({{ site.slug }})!
 </h3>
+
+<form action="/check-profile" method="POST">
+  {{#if site.profile }}
+    <section class="profile">
+      {{#if site.profile.photo }}<img src="{{ site.profile.photo }}" />{{/if}}
+      <a href="{{ site.url }}">{{ site.cute }}</a>
+      {{#if site.profile.name }}<div class="name">{{ site.profile.name }}</div>{{/if}}
+      {{#if site.profile.note }}<div class="note">{{ site.profile.note }}</div>{{/if }}
+    </section>
+  {{/if}}
+  <input type="submit" value="Fetch updated profile."/>
+</form>
 
 <div>
   Your site is currently: {{#unless site.active }}NOT {{/unless}} ACTIVE.
@@ -12,9 +24,9 @@
 
 <div>
 <textarea rows="6" cols="60">
-<a href="https://{{ hostname }}/{{site.slug}}/previous">←</a>
+<a href="https://{{ hostname }}/{{ site.slug }}/previous">←</a>
 An IndieWeb Webring 🕸💍
-<a href="https://{{ hostname }}/{{site.slug}}/next">→</a>
+<a href="https://{{ hostname }}/{{ site.slug }}/next">→</a>
 </textarea>  
 </div>
 
@@ -22,6 +34,4 @@ An IndieWeb Webring 🕸💍
   <input type="submit" value="Check links now!"/>
 </form>
 
-{{#if checks }}
- {{> checks }}
-{{/if}}
+{{#if checks }}{{> checks }}{{/if}}
