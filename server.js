@@ -66,9 +66,15 @@ function requireLogin(request, response, next) {
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-function profileFromHCard(card) {
-  let profile = {};
-  if ( ! 'properties' in card ) {
+function profileFromHCard(site, card) {
+  const u = new URL(site.url);
+  let profile = {
+    cute_url: u.hostname.replace(/^www./,'') + u.pathname.replace(/\/(index.html)?$/,''),
+    slug: site.slug,
+    slug_encoded: encodeURIComponent(site.slug),
+    url: site.url, // don't necessarily trust the URL in the h-card.
+  };
+  if ( ! ('properties' in card) ) {
     return profile;
   }
   ["name","note","photo"].forEach((prop) => {
@@ -94,10 +100,9 @@ app.get('/dashboard', requireLogin, function(request, response) {
             return row;
         });
         if(site.profile) {
-          site.profile = profileFromHCard(JSON.parse(site.profile));
+          site.profile = profileFromHCard(site, JSON.parse(site.profile));
         }
-        const u = new URL(site.url);
-        site.cute = u.hostname + u.pathname.replace(/\/$/,'')
+        site.slug_encoded = encodeURIComponent(site.slug);
         response.locals.context['site'] = site;
         response.locals.context['hostname'] = process.env.MAIN_URL;
         response.locals.context['checks'] = rows;
@@ -110,6 +115,21 @@ app.get('/dashboard', requireLogin, function(request, response) {
     });
 });
 
+app.get('/directory', function(request, response) {
+  return new Promise((fulfill, reject) => {
+    db.all('SELECT * FROM Sites WHERE active=1 AND profile IS NOT NULL ORDER BY timestamp DESC', function(err, rows){
+      let profiles = Array.prototype.map.call(rows, row => {
+        return profileFromHCard(row, JSON.parse(row.profile));
+      });
+      fulfill(profiles);
+    });
+  })
+  .then((profiles) => {
+    response.locals.context['profiles'] = profiles;
+    response.render('directory', response.locals.context);
+  });
+});
+
 app.post('/check-profile', requireLogin, function(request, response) {
   getSite(request.session.user.me)
     .then((site) => {
@@ -119,6 +139,14 @@ app.post('/check-profile', requireLogin, function(request, response) {
           return saveProfile(site, card);
         }
       })
+    })
+    .then(() => { setTimeout(() => { response.redirect('/dashboard'); }, 500); });
+});
+
+app.post('/remove-profile', requireLogin, function(request, response) {
+  getSite(request.session.user.me)
+    .then((site) => {
+      return saveProfile(site, null);
     })
     .then(() => { response.redirect('/dashboard'); });
 });
@@ -162,7 +190,16 @@ app.get('/:slug/previous', function(request, response) {
 
 app.get('/:slug', function(request, response) {
   getSiteBySlug(request.params.slug)
-    .then((site) => { response.redirect(site['url']); })
+    .then((site) => { 
+      if(site.profile) {
+          let profile = profileFromHCard(site, JSON.parse(site.profile));
+          profile.standalone = true;
+          response.locals.context['profile'] = profile;
+          response.render('profile', response.locals.context);
+      } else {
+        response.redirect(site['url']);
+      }
+    })
     .catch(() => { response.redirect('/'); });
 });
 

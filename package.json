@@ -12,7 +12,7 @@
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "hash-emoji-without-borders": "git+https://github.com/martymcguire/hash-emoji-without-borders#master",
-    "indieauth-authentication": "^0.0.3",
+    "indieauth-authentication": "^0.0.4",
     "microformat-node": "^2.0.1",
     "request": "^2.88.0",
     "sqlite3": "^4.0.4"

@@ -29,7 +29,7 @@ form {
   background-color: cyan;
   display: inline-block;
   width: 100%;
-  max-width: 340px;
+  max-width: 50ch;
   border-radius: 3px;
 }
 
@@ -70,9 +70,68 @@ footer {
   border-top: 1px solid lightgrey;
 }
 
+.status {
+  border: 1px solid lightgrey;
+  margin: 0 0 1em 0;
+  max-width: 72ch;
+  padding: 1em;
+}
+.status.active {
+  border-color: green;
+  background-color: honeydew;
+}
+.status.active::before {
+  content: '✔️';
+  color: green;
+}
+.status.active::after {
+  content: '😀';
+}
+.status.inactive {
+  border-color: red;
+  background-color: lavenderblush;
+}
+.status.inactive::before {
+  content: '⛔';
+}
+.status.inactive::after {
+  content: '😢';
+}
+.dashboard-urls summary {
+  font-weight: bold;
+}
+.dashboard-urls p {
+  font-style: italic;
+}
+
 .profile {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+}
+.profile > * {
+  margin-top: 1em;
+}
+.profile > *:first-child {
+  margin-top: 0;
+}
+.profile > a {
+  text-decoration: none;
 }
 .profile > img {
-  max-width: 100%;
+  width: 100%;
+}
+.profile .slug {
+  font-size: 2em;
+  margin-top: auto;
+  text-align: center;
+}
+
+.directory {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat( auto-fit, minmax(25ch, 1fr) );
+}
+.directory .profile {
+  background-color: cyan;
+  padding: 1rem;
 }
