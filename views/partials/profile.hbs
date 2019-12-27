@@ -1,0 +1,7 @@
+<section class="profile h-card">
+  {{#if photo }}<img src="{{ photo }}" />{{/if}}
+  <a class="u-url" {{#if standalone}}rel="me" {{/if}}href="{{ url }}">{{ cute_url }}</a>
+  {{#if name }}<div class="name p-name">{{ name }}</div>{{/if}}
+  {{#if note }}<div class="note p-note">{{ note }}</div>{{/if }}
+  <a class="slug p-webring-id" href="/{{ slug_encoded }}">{{ slug }}</a>
+</section>

@@ -1,0 +1,34 @@
+{
+  "name": "steady-sundial",
+  "version": "0.0.1",
+  "description": "A Node app built on Express, for running an IndieWeb Webring.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "cookie-session": "^1.3.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "hash-emoji-without-borders": "git+https://github.com/martymcguire/hash-emoji-without-borders#master",
+    "indieauth-authentication": "^0.0.4",
+    "microformat-node": "^2.0.1",
+    "request": "^2.88.0",
+    "sqlite3": "^4.0.4"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/steady-sundial"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express",
+    "webring",
+    "indieweb"
+  ]
+}

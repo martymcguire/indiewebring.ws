@@ -1,0 +1,58 @@
+<h2>
+  Hello, {{ site.url }} ({{ site.slug }})!
+</h2>
+
+<section>
+  <h2>Your Profile</h2>
+  <p>If you have one, your profile will be displayed on:</p>
+  <ul>
+    <li><a href="/directory">The webring directory</a></li>
+    <li><a href="/{{ site.slug_encoded }}">Your profile page ({{ site.slug }})</a></li>
+  </ul>
+
+  <div class="directory" style="grid-template-columns: minmax(25ch, 50ch);">
+    {{#if site.profile }}
+      {{> profile site.profile }}   
+      <form action="/remove-profile" method="POST" style="display: block; margin-bottom: 0">
+        <input type="submit" value="🗑 Remove my profile."/>
+        <small style="display: block; font-style: italic; padding: 0 1em;">
+          You'll still be in the webring, but will not appear in the directory.
+          Your profile page will redirect directly to your site.
+        </small>
+      </form>
+    {{ else }}
+      <div class="profile">You currently have no profile information.</div>
+    {{/if}}
+  </div>
+  <form action="/check-profile" method="POST">
+    <input type="submit" value="🔃 Check for updated profile."/>
+    <small style="display: block; font-style: italic; padding: 0 1em;">
+        We'll look for your name, photo, and note on the <a href="http://microformats.org/wiki/representative-h-card-authoring">representative h-card</a>
+        on your page. If you're having trouble, you can <a href="https://indiewebify.me/validate-h-card/?url={{ site.url }}">test your page with indiewebify.me</a>.
+    </small>
+  </form>
+</section>
+
+<section>
+  <h2>Your Site's Status</h2>
+  <div class="status {{#if site.active}}active{{else}}inactive{{/if}}">
+    Your site is currently: {{#unless site.active }}NOT {{/unless}} ACTIVE
+  </div>
+
+  <p>
+    To stay active, make sure links like these are visible on your site:
+  </p>
+
+  <div>
+    <textarea rows="6" cols="60" id="urls-compatible">
+  <a href="https://{{ hostname }}/{{ site.slug_encoded }}/previous">&larr;</a>
+  An IndieWeb Webring 🕸💍
+  <a href="https://{{ hostname }}/{{ site.slug_encoded }}/next">&rarr;</a></textarea>
+  </div>
+
+  <form action="/check-links" method="POST" style="margin-top: 1em">
+    <input type="submit" value="Check links now!"/>
+  </form>
+
+{{#if checks }}{{> checks }}{{/if}}
+</section>
