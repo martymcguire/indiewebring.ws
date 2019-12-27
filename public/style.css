@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+html {
+  color: #000;
+  background-color: #FFF;
+}
+
 body {
   font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
   margin: 2em;
