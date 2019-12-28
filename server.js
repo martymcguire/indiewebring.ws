@@ -87,7 +87,11 @@ function profileFromHCard(site, card) {
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
-  response.render('index', response.locals.context)
+  response.render('index', response.locals.context);
+});
+
+app.get("/terms", function (request, response) {
+  response.render('terms', response.locals.context);
 });
 
 app.get('/dashboard', requireLogin, function(request, response) {

@@ -140,3 +140,10 @@ footer {
   background-color: cyan;
   padding: 1rem;
 }
+
+dt {
+  border-top: 1px dotted black;
+  font-weight: bold;
+  font-style: italic;
+  padding: 2em 0 0;
+}
