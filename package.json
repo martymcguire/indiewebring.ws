@@ -9,7 +9,7 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "cookie-session": "^1.4.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-handlebars": "^5.3.3",
     "hash-emoji-without-borders": "git+https://github.com/martymcguire/hash-emoji-without-borders#master",
     "indieauth-authentication": "^0.0.5",
