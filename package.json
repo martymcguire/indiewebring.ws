@@ -7,18 +7,18 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "body-parser": "^1.20.0",
     "cheerio": "^0.22.0",
     "cookie-session": "^1.4.0",
-    "express": "^4.17.3",
+    "express": "^4.18.2",
     "express-handlebars": "^5.3.3",
     "hash-emoji-without-borders": "git+https://github.com/martymcguire/hash-emoji-without-borders#master",
     "indieauth-authentication": "^0.0.5",
+    "jsdom": "^18.0.0",
     "microformat-node": "^2.0.1",
+    "qs": "^6.11.0",
     "request": "^2.88.2",
-    "sqlite3": "^5.1.2",
-    "body-parser": "^1.19.0",
-    "qs": "^6.10.3",
-    "jsdom": "^18.0.0"
+    "sqlite3": "^5.1.4"
   },
   "engines": {
     "node": "14.x"
