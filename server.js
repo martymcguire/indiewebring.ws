@@ -18,7 +18,7 @@ app.use(cookieSession({
 }))
 
 // this lib provides express routes to handle the IndieAuth dance
-const IndieAuthAuthn = require('./lib/indieauth-authn')
+const IndieAuthAuthn = require('./lib/indieauth-authn');
 const indieAuth = IndieAuthAuthn({
   successRedirect: '/dashboard',
   clientId: 'https://' + process.env.MAIN_URL + '/' });
